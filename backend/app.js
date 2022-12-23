@@ -7,9 +7,9 @@ app.use(bodyparser.json())
 app.use(cors())
 const User= require('./models/users')
 const userControllers= require('./controllers/signup')
-
+const loginController= require('./controllers/login')
 app.post('/user/signup',userControllers.saveUser)
-
+app.post('/user/login',loginController.login)
 
 
 

@@ -5,6 +5,7 @@ let password= document.getElementById('password')
 let http="http://localhost:3000"
 form.addEventListener('submit',signup)
 
+
 function signup(e){
 e.preventDefault()
 if(email.value===''|| name.value==='' ||password.value=== ''){
