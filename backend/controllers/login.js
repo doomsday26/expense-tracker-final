@@ -14,17 +14,19 @@ if(users[0].password===req.body.password){
 }
 
 else{
-    res.send({
+    res.status(401).send({
         success:false,
-        valid:"incorrect password"
+        valid:"incorrect password",
+        status:401
     })
 }
 
 
 }else{
-    res.send({
+    res.status(404).send({
         success:false,
-        valid:"user doesn't exists"
+        valid:"user doesn't exists",
+        status:404
     })
 }
 

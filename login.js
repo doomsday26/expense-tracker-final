@@ -10,13 +10,19 @@ e.preventDefault()
 console.log(email.value,password.value);
 axios.post(http+'/user/login',{ 'email': email.value, 'password': password.value }).then(
     result=>{
+        console.log(result);
        if(result.success){
-alert("you have successgully logged in")
+window.alert(result.valid)
+document.getElementById('errorheading').innerHTML=""
        }else{
-        alert(result.valid)
+      window.alert(result.valid)
        }
     }
-).catch(err=>{console.log(err);})
+).catch(err=>{console.log(err);
+// alert("status:  "+err.status+err.valid)
+
+document.getElementById('errorheading').innerHTML= err.valid+ " error:  "+ err.status
+})
 
 }
 

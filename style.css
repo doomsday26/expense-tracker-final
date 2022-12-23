@@ -77,3 +77,8 @@ a{
 input{
     border-radius: 0.5vh;
 }
+
+#errorheading{
+    color: red;
+    font-weight: lighter;
+}
