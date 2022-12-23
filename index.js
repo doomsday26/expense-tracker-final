@@ -2,7 +2,7 @@ let form= document.getElementById('form')
 let email = document.getElementById('email')
 let name= document.getElementById('name')
 let password= document.getElementById('password')
-
+let http="http://localhost:3000"
 form.addEventListener('submit',signup)
 
 function signup(e){
@@ -10,9 +10,21 @@ e.preventDefault()
 if(email.value===''|| name.value==='' ||password.value=== ''){
     alert("please enter all the values")
 }else{
-    console.log(email.value);
-    console.log(name.value);
-    console.log(password.value);  
+
+axios.post(http+'/user/signup',{
+    "name":name.value,
+    "email":email.value,
+    "password":password.value
+}).then(
+    result=>{
+if(!result.success){
+    alert("id already present please login no user could be added")
+}
+        name.value="";
+        email.value="";
+        password.value=""
+    }
+)
 }
 
 
