@@ -14,6 +14,7 @@ axios.post(http+'/user/login',{ 'email': email.value, 'password': password.value
        if(result.success){
 window.alert(result.valid)
 document.getElementById('errorheading').innerHTML=""
+window.location.assign('expenses.html')
        }else{
       window.alert(result.valid)
        }

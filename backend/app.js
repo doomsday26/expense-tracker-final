@@ -5,11 +5,18 @@ const bodyparser= require('body-parser')
 const sequelize= require('./database')
 app.use(bodyparser.json())
 app.use(cors())
+const Expense= require('./models/expense')
 const User= require('./models/users')
 const userControllers= require('./controllers/signup')
 const loginController= require('./controllers/login')
+const expenseRoutes= require('./routes/expenseRoute')
+app.use('/expense',expenseRoutes)
+
+
 app.post('/user/signup',userControllers.saveUser)
 app.post('/user/login',loginController.login)
+
+
 
 
 
