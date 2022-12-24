@@ -1,4 +1,6 @@
 const User= require('../models/users')
+const bcrypt = require('bcrypt');
+const saltRounds= 10;
 
 exports.saveUser=(req,res,next)=>{
 let email= req.body.email;
@@ -9,10 +11,13 @@ User.findAll({where:{email:email}}).then(users=>{
             "success":false,
         })
     }else{
+
+bcrypt.genSalt(saltRounds,(err,salt)=>{
+    bcrypt.hash(req.body.password,salt,(err,hash)=>{
         User.create({
             name:req.body.name,
             email:req.body.email,
-            password:req.body.password
+            password:hash
         }).then((result=>{
             console.log(result);
             res.json({
@@ -22,6 +27,14 @@ User.findAll({where:{email:email}}).then(users=>{
         .catch(err=>{
             console.log(err);
         })
+    })
+})
+
+
+
+
+
+     
     }
    
 }).catch(err=>{

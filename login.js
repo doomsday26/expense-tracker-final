@@ -10,7 +10,7 @@ e.preventDefault()
 console.log(email.value,password.value);
 axios.post(http+'/user/login',{ 'email': email.value, 'password': password.value }).then(
     result=>{
-        console.log(result);
+        console.log(result.status);
        if(result.success){
 window.alert(result.valid)
 document.getElementById('errorheading').innerHTML=""
@@ -20,7 +20,7 @@ document.getElementById('errorheading').innerHTML=""
     }
 ).catch(err=>{console.log(err);
 // alert("status:  "+err.status+err.valid)
-
+console.log(err.code);
 document.getElementById('errorheading').innerHTML= err.valid+ " error:  "+ err.status
 })
 
