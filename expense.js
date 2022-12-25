@@ -10,15 +10,16 @@ const http= "http://localhost:3000/expense/";
 form.addEventListener('submit',add);
 userList.addEventListener('click',removeItem)
 userList.addEventListener('click',EditItem)
+let token = localStorage.getItem("userData")
+window.addEventListener('DOMContentLoaded',load)
 
-window.addEventListener('DOMContentLoaded',async()=>{
-  await axios.get(http).then(res=>{ 
+async function load(){
+  await axios.get(http,{headers:{"Authourization":token}}).then(res=>{ 
     console.log(res);
     displayexpenses(res);
    }).catch(err=>{console.log("error found"); console.log(err)});  
 
-})
-
+}
 
 async function add(e){
     e.preventDefault();
@@ -26,10 +27,8 @@ async function add(e){
     else{
        
       let obj={"ammount":ammount.value, "category":category.value,"description": description.value}
-    await axios.post(http,obj).then(res=> console.log(res.data)).catch(err=>{console.log(err);})
-    await axios.get(http).then(res=>{ 
-      displayexpenses(res)
-      ; }).catch(err=>{console.log(err)});  
+    await axios.post(http,obj,{headers:{"Authourization":token}}).then(res=> console.log(res.data)).catch(err=>{console.log(err);})
+    load()
     }
     }
     
@@ -45,9 +44,23 @@ async function add(e){
     //creating li object
     let li= document.createElement('li');
     li.id=destring.id;
-    li.appendChild(document.createTextNode(destring.ammount + ': ' ))
-    li.appendChild(document.createTextNode(destring.category+ " - "))
-    li.appendChild(document.createTextNode(destring.description))
+
+
+
+let ammountspan= document.createElement('span')
+ammountspan.className="amtspn"
+ammountspan.appendChild(document.createTextNode("Rs:  "+destring.ammount  ))
+ li.appendChild(ammountspan)
+
+
+ let categoryspan= document.createElement('span')
+ categoryspan.appendChild(document.createTextNode(destring.category))
+  li.appendChild(categoryspan)
+
+  let descriptionspan= document.createElement('span')
+  descriptionspan.appendChild(document.createTextNode(destring.description))
+   li.appendChild(descriptionspan)
+
     //create span
     let span = document.createElement('span');
     span.appendChild(document.createTextNode('  '))
@@ -55,12 +68,10 @@ async function add(e){
     //delete button
     let btn = document.createElement('button');
     btn.className='delete'
-    btn.appendChild(document.createTextNode('DEL'))
+    btn.appendChild(document.createTextNode('DELETE'))
     li.appendChild(btn)
     // edit button
-    let span2 = document.createElement('span');
-    span2.appendChild(document.createTextNode('  / '))
-    li.appendChild(span2)
+    
     let editbtn = document.createElement('button');
     editbtn.className='edit'
     editbtn.appendChild(document.createTextNode('EDIT'))
@@ -78,15 +89,12 @@ async function add(e){
         var li= e.target.parentElement;
          let key = li.id;
          console.log(key);
-        await axios.delete(http+key).
+        await axios.delete(http+key,{headers:{"Authourization":token}}).
          then( res=>{console.log(res);
          }).catch(err=>{console.log(err);})
         }
       
-       await axios.get(http).then(res=>{
-      displayexpenses(res);
-      } )
-      .catch(err=>console.log(err))
+    await load()
         }
     
     

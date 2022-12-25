@@ -15,7 +15,7 @@ name:{
     email:{
         type:Sequelize.STRING,
         allowNull:false,
-        primaryKey:true
+   
     },
     password:{
         type:Sequelize.STRING,

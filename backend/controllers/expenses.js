@@ -1,7 +1,12 @@
 const Expense= require('../models/expense')
+const User= require('../models/users')
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
 //controllers
+
 exports.getExpenses=(req,res,next)=>{
-    Expense.findAll().then(expenses=>{
+ //console.log("request user >>>>>>>>>>>>>>>>",req.user);
+    Expense.findAll({where:{userId:req.user.id}}).then(expenses=>{
         res.send(expenses)
     }).catch(err=>{
         console.log(err);
@@ -9,11 +14,23 @@ exports.getExpenses=(req,res,next)=>{
 }
 
 exports.addExpense=(req,res,next)=>{
-Expense.create({"ammount":req.body.ammount, "category":req.body.category,"description": req.body.description}).then(result=>{
-    res.send(result)
+    console.log(req.body);
+User.findByPk(req.user.id).then(user=>{
+    console.log(user);
+   return user.createExpense(req.body)
+
+}).then(result=>{
+    console.log(result);
+    res.send({success:true})
 }).catch(err=>{
     console.log(err);
 })
+    
+// Expense.create({"ammount":req.body.ammount, "category":req.body.category,"description": req.body.description}).then(result=>{
+//     res.send(result)
+// }).catch(err=>{
+//     console.log(err);
+// })
 }
 
 exports.getOneExpense=(req,res,next)=>{

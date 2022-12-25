@@ -16,13 +16,14 @@ app.use('/expense',expenseRoutes)
 app.post('/user/signup',userControllers.saveUser)
 app.post('/user/login',loginController.login)
 
-
-
+Expense.belongsTo(User,{constraints:true,onDelete:'CASCADE'}),
+User.hasMany(Expense)
+//{constraints:true,onDelete:'CASCADE'}
 
 
 sequelize
 .sync()
-//.sync({force:true})
+//sync({force:true})
 .then(result=>{
     // console.log(result);
 })

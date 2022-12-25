@@ -10,10 +10,12 @@ e.preventDefault()
 console.log(email.value,password.value);
 axios.post(http+'/user/login',{ 'email': email.value, 'password': password.value }).then(
     result=>{
-        console.log(result.status);
+ //       console.log(result);
        if(result.success){
 window.alert(result.valid)
-document.getElementById('errorheading').innerHTML=""
+
+localStorage.setItem("userData", result.userdata  )
+//change location
 window.location.assign('expenses.html')
        }else{
       window.alert(result.valid)

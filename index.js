@@ -20,6 +20,8 @@ axios.post(http+'/user/signup',{
     result=>{
 if(!result.success){
     alert("id already present please login no user could be added")
+}else{
+    window.location.assign('login.html')
 }
         name.value="";
         email.value="";
