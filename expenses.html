@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TRACK YOUR MONEY</title>
     <link rel="stylesheet" href="expenses.css" />
   </head>
   <body>
@@ -37,25 +37,79 @@
               <option value="unnecessary">unnecessary</option>
               <option value="justified">justified</option>
             </select>
-            <br />
+
             <input type="hidden" id="expenseId" name="expenseId" />
+        
             <input type="submit" id="submit" value="Submit" />
             <br />
           </form>
+         
         </div>
+        <div id="noPremium"><p>Get access to more features with premium membeship</p><br>
+          <button id="premium-btn">Get Premium</button>
+          <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+          </div>
+          <div id="premium">
+            <h2>Welcome Premium User </h2>
+          </div>
+          <div id="leaderboard">
+            <h3>Leaderboard </h3>
+            <header id="leader-header"><span>Name</span><span>Total Expense</span></header>
+            <ul id="leader-list">
+              <!-- <li class="leader-item"><span class="leadername">name</span><span class="leader-money">money</span></li>
+              <li class="leader-item"><span class="leadername">name</span><span class="leader-money">money</span></li> -->
+            </ul>
+          </div>
+          <div>
+            <button id="report">Display Report</button>
+            <button id="hidereport">Hide Report</button>
+          </div>
       </div>
       <!-- displaying expenses -->
 
       <div id="display-expense">
         <h2>YOUR EXPENSES</h2>
+        <div class="page" id="pagination">
+          <form class="page" id="paginationForm">
+            <label for="rowspp">Rows Per Page : </label>
+            <input type="text" name="rowspp" id="rowspp" value="6">
+            <input type="submit" id="paginationSubmit" value="display">
+          </form>
+        <div class="page" id="paginationBtn">
+          <button class="paginationBtns" id="backward"><</button> 
+          <span class="paginationBtns" id="mid"></span>
+          <button class="paginationBtns" id="forward"> > </button>
+        </div>
+        </div>
         <div class="display" id="display">
           <ul id="displayList">
             
           </ul>
       </div>
-      </div>
+      <div id="reports">
+        <h3>Your Report :</h3>
+        <ul id="desRepo" class="displayReports">
+  
+      </ul>
+      <ul id="catRepo" class="displayReports">
+      
+      </ul>
     </div>
-
+    <div class="page">
+  <button id="downloadReport" >Download This Report</button>
+      <button id="allReport">Show previous reports</button>
+      <button id="hideallReport">hide previous reports</button>
+    </div>
+      
+    <div id="previousrReports">
+      <h4>click to download any report</h4>
+      <ul id="previousReportsList">
+      
+      </ul>
+    </div>
+  </div>
+    </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.2.0/axios.min.js"></script>
     <script src="expense.js"></script>
   </body>

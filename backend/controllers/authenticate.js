@@ -2,11 +2,12 @@ const jwt = require('jsonwebtoken')
 const User= require('../models/users')
 require('dotenv').config()
 let userdata
+let i=0
 exports.userAuthenticate=  (req,res,next)=>{
 jwt.verify(req.headers.authourization,process.env.JWT_KEY,async (err,value)=>{
         if(!err){
 userdata=value
-//console.log("usrdd data >>>>>",userdata);
+//console.log(i++,"usrdd data >>>>>",userdata);
 await User.findByPk(userdata.userId).then(result=>{
     req.user=result
   // console.log(result);
