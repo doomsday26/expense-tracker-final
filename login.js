@@ -57,6 +57,10 @@ function forgot() {
       .post(http + "/password/forgotpassword", { email: email.value })
       .then((result) => {
         //console.log(result);
+if(result.msg){
+  alert(result.msg)
+}
+
         if (result.requestGenerated) {
           let newPasswordform = document.createElement("form");
           document.getElementById("forgot").removeChild(resetform);

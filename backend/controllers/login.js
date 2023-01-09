@@ -83,6 +83,10 @@ exports.forgetpass = async (req, res, next) => {
 
   User.findAll({ where: { email: req.body.email } })
     .then((users) => {
+if(users.length==0){
+  res.send({msg:"no user by this name"})
+}
+
       console.log(users);
       return users[0].createForgotRequest({ id: uuidv4(), isActive: true });
     })

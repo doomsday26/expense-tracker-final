@@ -67,18 +67,22 @@ async function load() {
     .then(async (res) => {
       console.log(res);
       console.log(rowspp);
-      if (res.Status == "pending") {
-        document.getElementById("premium").style.display = "none";
-        document.getElementById("noPremium").style.display = "contents";
-        document.getElementById("leaderboard").style.display = "none";
-      } else {
-        reportButton.addEventListener("click", displayReport);
-        document.getElementById("premium").style.display = "contents";
-        document.getElementById("noPremium").style.display = "none";
-        document.getElementById("leaderboard").style.display = "block";
+      if (res.Status == "success") {
+        reportButton.addEventListener("click", displayReport);   
         await displayLeaderBoard();
-       // await displayReport();
+
+ } else if(res.Status == "pending") {
+var paras = document.getElementsByClassName('premium');
+while(paras[0]) {
+    paras[0].parentNode.removeChild(paras[0]);
+}
+
       }
+
+
+
+
+
       displayexpenses(res.Expenses);
     })
     .catch((err) => {
@@ -255,7 +259,8 @@ try {
       orderId:options.order_id,
       payment_Id:response.razorpay_payment_id,
     },{headers:{Authourization: token}})
-  alert('you are a premium user now ')
+  alert('you are a premium user now,please refresh once ')
+  location.reload()
   await load();
   }}
   
@@ -276,7 +281,7 @@ try {
     }
   }
 
-
+await load();
 
 }
 
